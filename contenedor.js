@@ -18,7 +18,7 @@ module.exports = class Contenedor {
 		const data = this.getAll();
 		if (id <= 0 || id > data.length) {
 			return {
-				error: "El producto con el id especificado no ha sido encontrado.",
+				error: "No hay resultado para su búsqeuda.",
 			};
 		}
 		return data.find(element => element.id === id);
