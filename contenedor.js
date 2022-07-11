@@ -66,7 +66,6 @@ module.exports = class Contenedor {
 		}
 	}
 
-  // Agrega id a los productos del archivo "productos.json" si sufre alguna modificacion
   assign(empty = false) {
 		if(empty) {
 			let id = 1;
