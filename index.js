@@ -1,14 +1,20 @@
+
+
 const express = require("express");
 const app = express();
 const router = express.Router();
 
+const PORT = process.env.PORT || 8080;
 
-// <------------------------- Contenedor de Productos ------------------------->
+const server = app.listen(PORT, () => {
+  console.log(`Servidor HTTP escuchando en el puerto ${server.address().port}`);
+});
+
+server.on("error", error => console.log(`Error en servidor: ${error}`));
+
 
 const Contenedor = require("./contenedor");
 const contenedor1 = new Contenedor("productos.json");
-
-// <------------------------- Configuracion Rutas ------------------------->
 
 app.use("/api/productos", router);
 router.use(express.json());
@@ -16,7 +22,6 @@ router.use(express.urlencoded({ extended: true }));
 
 app.use(express.static("public"));
 
-// <------------------------- Rutas ------------------------->
 
 router.get("/", (req, res) => {
   const { id } = req.query;
@@ -54,12 +59,4 @@ router.delete("/:id", (req, res) => {
   res.json(contenedor1.delete(Number(id)));
 })
 
-// <------------------------- Servidor ------------------------->
 
-const PORT = process.env.PORT || 8080;
-
-const server = app.listen(PORT, () => {
-  console.log(`Servidor HTTP escuchando en el puerto ${server.address().port}`);
-});
-
-server.on("error", error => console.log(`Error en servidor: ${error}`));
